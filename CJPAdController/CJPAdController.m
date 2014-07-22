@@ -13,7 +13,7 @@ static CJPAdController *CJPSharedManager = nil;
 @implementation CJPAdController
 
 @synthesize iAdView              = _iAdView;
-@synthesize adMobView            = _adMobView;
+//@synthesize adMobView            = _adMobView;
 @synthesize contentController    = _contentController;
 @synthesize containerView        = _containerView;
 @synthesize showingiAd           = _showingiAd;
@@ -122,7 +122,7 @@ static CJPAdController *CJPSharedManager = nil;
     
     // Create AdMob
     else if([adType isEqualToString:@"AdMob"]){
-        GADAdSize adMobSize;
+/*        GADAdSize adMobSize;
         if (kUseAdMobSmartSize) {
             if (!isPortrait)
                 adMobSize = kGADAdSizeSmartBannerLandscape;
@@ -181,7 +181,7 @@ static CJPAdController *CJPSharedManager = nil;
             [adMobRequest tagForChildDirectedTreatment:tagForCOPPA];
         }
         
-        [_adMobView loadRequest:adMobRequest];
+        [_adMobView loadRequest:adMobRequest];*/
     }
     
     if(kAdTesting) NSLog(@"%@ added to view.", adType);
@@ -218,7 +218,7 @@ static CJPAdController *CJPSharedManager = nil;
     }
     
     // AdMob
-    if ([adType isEqualToString:@"AdMob"]) {
+/*    if ([adType isEqualToString:@"AdMob"]) {
         _showingAdMob = NO;
         CGRect bannerFrame = _adMobView.frame;
         if([kAdPosition isEqualToString:@"bottom"]){
@@ -235,7 +235,7 @@ static CJPAdController *CJPSharedManager = nil;
             [_adMobView removeFromSuperview];
             _adMobView = nil;
         }
-    }
+    }*/
     
     if(kAdTesting && permanent) NSLog(@"Permanently removed %@ from view.", adType);
     if(kAdTesting && !permanent) NSLog(@"Temporarily hidden %@ off screen.", adType);
@@ -266,7 +266,7 @@ static CJPAdController *CJPSharedManager = nil;
     
     // Remove all ad banners from the view
     if(_iAdView!=nil) [self removeBanner:@"iAd" permanently:YES];
-    if(_adMobView!=nil) [self removeBanner:@"AdMob" permanently:YES];
+//    if(_adMobView!=nil) [self removeBanner:@"AdMob" permanently:YES];
     
     // Set adsRemoved to YES, and store in UserDefaults for future use
     _adsRemoved = YES;
@@ -364,7 +364,7 @@ static CJPAdController *CJPSharedManager = nil;
     }
     
     // If either an iAd or AdMob view has been created we'll figure out which views need adjusting
-    if (_iAdView || _adMobView) {
+    if (_iAdView) {// || _adMobView) {
         // iAd specific stuff
         if (_iAdView) {
             adType = @"iAd";
@@ -383,7 +383,7 @@ static CJPAdController *CJPSharedManager = nil;
         }
         
         // AdMob specific stuff
-        if (_adMobView) {
+/*        if (_adMobView) {
             adType = @"AdMob";
             if (kUseAdMobSmartSize) {
                 if (isPortrait) _adMobView.adSize = kGADAdSizeSmartBannerPortrait;
@@ -402,7 +402,7 @@ static CJPAdController *CJPSharedManager = nil;
                 bannerFrame.origin.x = adMobXOffset;
                 _adMobView.frame = bannerFrame;
             }
-        }
+        }*/
 
         // Now if we actually have an ad to display
         if (_showingiAd || _showingAdMob) {
@@ -444,7 +444,7 @@ static CJPAdController *CJPSharedManager = nil;
         }
         
         if (_showingiAd)        _iAdView.frame = bannerFrame;
-        else if (_showingAdMob) _adMobView.frame = bannerFrame;
+//        else if (_showingAdMob) _adMobView.frame = bannerFrame;
     }
 
     // If we're on iOS 7 and aren't showing any ads yet, or if they have been removed
@@ -478,7 +478,7 @@ static CJPAdController *CJPSharedManager = nil;
     
     if(!_showingiAd){
         // Ensure AdMob is hidden
-        if (_showingAdMob || _adMobView!=nil) {
+/*        if (_showingAdMob || _adMobView!=nil) {
             // If we're preferring iAd then we should remove AdMob rather than simply hiding it
             if ([kDefaultAds isEqualToString:@"iAd"]) {
                 [self removeBanner:@"AdMob" permanently:YES];
@@ -487,7 +487,7 @@ static CJPAdController *CJPSharedManager = nil;
                 [self removeBanner:@"AdMob" permanently:NO];
             }
             _showingAdMob = NO;
-        }
+        }*/
     }
     _showingiAd = YES;
     _iAdView.hidden = NO;
@@ -513,7 +513,7 @@ static CJPAdController *CJPSharedManager = nil;
     _showingiAd = NO;
     
     // Create AdMob (if not already created)
-    if (kUseAdMob) {
+/*    if (kUseAdMob) {
         if(kAdTesting) NSLog(@"Trying AdMob instead...");
         if(_adMobView==nil){
             if(kAdTesting) NSLog(@"adMobView doesn't exist. Creating view.");
@@ -523,7 +523,7 @@ static CJPAdController *CJPSharedManager = nil;
             if(kAdTesting) NSLog(@"adMobView already exists. Requesting new ad.");
             [_adMobView loadRequest:[GADRequest request]];
         }
-    }
+    }*/
     
     [UIView animateWithDuration:0.25 animations:^{
         [self layoutAds];
@@ -543,7 +543,7 @@ static CJPAdController *CJPSharedManager = nil;
 #pragma mark -
 #pragma mark AdMob Delegate Methods
 
-- (void)adViewDidReceiveAd:(GADBannerView *)bannerView
+/*- (void)adViewDidReceiveAd:(GADBannerView *)bannerView
 {
     if(kAdTesting) NSLog(@"New AdMob ad received.");
     
@@ -598,7 +598,7 @@ static CJPAdController *CJPSharedManager = nil;
     [UIView animateWithDuration:0.25 animations:^{
         [self layoutAds];
     }];
-}
+}*/
 
 // Unused AdMob delegate methods
 //- (void)adViewWillPresentScreen:(GADBannerView *)bannerView

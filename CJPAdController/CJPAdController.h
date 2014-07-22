@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <iAd/iAd.h>
-#import "GADBannerView.h"
+//#import "GADBannerView.h"
 
 // Display iAds?
 static BOOL const kUseiAd = YES;
@@ -57,10 +57,10 @@ static BOOL const kAdTesting = NO;
 static NSString * const tagForChildDirectedTreatment = @"";
 
 
-@interface CJPAdController : UIViewController <ADBannerViewDelegate, GADBannerViewDelegate>
+@interface CJPAdController : UIViewController <ADBannerViewDelegate>//, GADBannerViewDelegate>
 
 @property (nonatomic, strong) ADBannerView      *iAdView;
-@property (nonatomic, strong) GADBannerView     *adMobView;
+//@property (nonatomic, strong) GADBannerView     *adMobView;
 @property (nonatomic, strong) UIViewController  *contentController;
 @property (nonatomic, strong) UIView            *containerView;
 @property (nonatomic, assign) BOOL              showingiAd;
